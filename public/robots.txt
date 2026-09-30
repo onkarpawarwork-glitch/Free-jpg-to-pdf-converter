@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jpgtopdfonline.in/sitemap-index.xml

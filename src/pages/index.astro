@@ -1,11 +1,113 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Converter from '../components/Converter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const faqs = [
+	{ question: 'How do I convert JPG to PDF?', answer: 'Choose JPG or JPEG images from your device, arrange or rotate them if needed, select page settings and a target size, then choose Convert to PDF and download the result.' },
+	{ question: 'Is this JPG to PDF converter free to use?', answer: 'Yes. You can use the converter without creating an account or paying to convert your images.' },
+	{ question: 'Are my images uploaded to a server?', answer: 'The converter reads and processes your selected images in your browser. It does not upload them to a conversion server. Your browser and the hosting provider may still process routine connection data when loading the website.' },
+	{ question: 'How does the target PDF size work?', answer: 'Choose a maximum size and the converter adjusts image quality and dimensions, then checks the actual generated PDF. The size is a limit to aim for, not a guarantee that every set of images can fit under it.' },
+	{ question: 'Can I combine multiple JPG images into one PDF?', answer: 'Yes. Add multiple JPG or JPEG images, arrange their order, and keep “Merge all images into one PDF” selected to create a single document.' },
+	{ question: 'What if my target size cannot be reached?', answer: 'The converter returns the smallest result it could create and tells you the target was not met. You can remove images or select a larger maximum size.' },
+	{ question: 'Which image formats are supported?', answer: 'The converter accepts JPG and JPEG images. Other image formats are not supported.' },
+	{ question: 'Can I use the converter on a phone?', answer: 'Yes. Use the file picker on a mobile browser to choose images from your gallery or take a photo if your device offers that option.' },
+	{ question: 'Do I need an account?', answer: 'No account or sign-in is required.' },
+	{ question: 'Will the PDF keep the original image quality?', answer: 'The converter preserves the highest practical quality it can while trying to meet your selected size. If the target is very small, image dimensions or JPEG quality may be reduced.' },
+];
+
+const webApplication = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: 'Free JPG to PDF Converter Online',
+	url: 'https://jpgtopdfonline.in/',
+	description: 'Convert JPG and JPEG images into PDF files in your browser, with page settings and an optional maximum file-size target.',
+	applicationCategory: 'UtilitiesApplication',
+	operatingSystem: 'Any',
+	browserRequirements: 'A modern web browser with JavaScript enabled',
+	isAccessibleForFree: true,
+	featureList: ['JPG and JPEG to PDF conversion', 'Multiple images per document', 'Page size, orientation, and margin settings', 'Optional target PDF size optimization', 'Client-side image processing'],
+};
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+};
 ---
 
 <Layout>
-	<Welcome />
+	<SiteHeader />
+	<main id="top">
+		<section aria-labelledby="page-title" class="container-shell pt-8 pb-12 sm:pt-10 sm:pb-16">
+			<div class="mx-auto max-w-[760px] text-center">
+				<div class="mb-4 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-1 px-3 py-1.5 text-xs font-medium text-ink-muted"><span class="size-1.5 rounded-full bg-success" aria-hidden="true"></span>Private, browser-based conversion</div>
+				<h1 id="page-title" class="text-[36px] leading-[1.06] font-semibold tracking-[-.055em] text-ink sm:text-[52px] lg:text-[60px]">Free JPG to PDF Converter Online</h1>
+				<p class="mx-auto mt-4 max-w-[650px] text-base leading-7 text-ink-subtle sm:text-lg">Convert your JPG images into a PDF that meets your required file-size limit. Arrange your pages, choose a target, and create the file in your browser—no account required.</p>
+			</div>
+			<div id="converter" class="mx-auto mt-7 max-w-[820px] scroll-mt-6 sm:mt-9"><Converter /></div>
+			<ul class="mx-auto mt-5 flex max-w-[820px] flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-ink-subtle">
+				<li>JPG and JPEG images</li><li>Files stay on your device</li><li>Choose a maximum PDF size</li>
+			</ul>
+		</section>
+
+		<section id="how-to-convert" class="border-t border-hairline bg-[#08090a] py-14 sm:py-16" aria-labelledby="how-title">
+			<div class="container-shell">
+				<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">A clear, simple process</p>
+				<h2 id="how-title" class="text-[28px] font-semibold tracking-[-.04em] sm:text-[34px]">How to convert JPG to PDF</h2>
+				<ol class="mt-7 grid gap-3 md:grid-cols-3">
+					<li class="surface-panel p-5 sm:p-6"><span class="mb-5 grid size-9 place-items-center rounded-lg border border-hairline-strong bg-surface-2 text-sm font-medium text-ink-muted">01</span><h3 class="mb-2 text-base font-semibold text-ink">Upload your JPG images</h3><p class="text-sm leading-6 text-ink-subtle">Choose one or more JPG or JPEG files from your device, or drop them into the converter.</p></li>
+					<li class="surface-panel p-5 sm:p-6"><span class="mb-5 grid size-9 place-items-center rounded-lg border border-hairline-strong bg-surface-2 text-sm font-medium text-ink-muted">02</span><h3 class="mb-2 text-base font-semibold text-ink">Arrange images and choose PDF settings</h3><p class="text-sm leading-6 text-ink-subtle">Set the order, rotate or remove images, and choose a page size, orientation, and margins.</p></li>
+					<li class="surface-panel p-5 sm:p-6"><span class="mb-5 grid size-9 place-items-center rounded-lg border border-hairline-strong bg-surface-2 text-sm font-medium text-ink-muted">03</span><h3 class="mb-2 text-base font-semibold text-ink">Set your target size and download</h3><p class="text-sm leading-6 text-ink-subtle">Pick a maximum PDF size or use no limit. Convert the images and save the finished PDF.</p></li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="container-shell py-14 sm:py-16" aria-labelledby="why-size-title">
+			<div class="grid gap-6 md:grid-cols-[.8fr_1.2fr] md:gap-12">
+				<div><p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">A practical constraint</p><h2 id="why-size-title" class="text-[28px] leading-tight font-semibold tracking-[-.04em] sm:text-[34px]">Why your PDF file size matters</h2></div>
+				<div class="space-y-4 text-sm leading-7 text-ink-subtle sm:text-base"><p>Online forms often set a maximum file size for each attachment. A PDF made from phone photos can exceed that limit, even when the document contains only a few pages.</p><p>Government, exam, job, scholarship, and college or university applications may each set their own upload rules. Check the portal’s instructions first, then choose a suitable maximum here. A smaller target can require lower image quality or dimensions, so review the result before submitting it.</p><p>The converter measures the PDF it creates and reports whether it met your selected maximum. It cannot guarantee that every collection of images will fit under every limit.</p></div>
+			</div>
+		</section>
+
+		<section class="border-y border-hairline bg-[#08090a] py-14 sm:py-16" aria-labelledby="common-sizes-title">
+			<div class="container-shell">
+				<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Choose a useful limit</p><h2 id="common-sizes-title" class="text-[28px] font-semibold tracking-[-.04em] sm:text-[34px]">Common JPG to PDF target sizes</h2>
+				<p class="mt-3 max-w-[690px] text-sm leading-6 text-ink-subtle">Different portals use different attachment limits. These options are available in the converter; the final file size depends on your images and settings.</p>
+				<div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 200 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">For strict limits and small image sets. Fine detail may be reduced significantly.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-white" href="/#converter" aria-label="Open converter options for a 200 KB target">Open converter options</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 500 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A commonly requested cap for compact application attachments.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-white" href="/#converter" aria-label="Open converter options for a 500 KB target">Open converter options</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 1 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">More room for image detail when a portal accepts a larger document.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-white" href="/#converter" aria-label="Open converter options for a 1 MB target">Open converter options</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 2 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A higher cap can help preserve more detail in a multi-image PDF.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-white" href="/#converter" aria-label="Open converter options for a 2 MB target">Open converter options</a></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="container-shell py-14 sm:py-16" aria-labelledby="privacy-title">
+			<div class="surface-panel grid gap-6 p-6 sm:p-8 md:grid-cols-[auto_1fr] md:items-start">
+				<span class="grid size-11 place-items-center rounded-xl border border-hairline bg-surface-2 text-ink-muted" aria-hidden="true"><svg viewBox="0 0 20 20" class="size-5" fill="none"><path d="M10 2.5 4 5v4.3c0 3.8 2.6 6.6 6 8.2 3.4-1.6 6-4.4 6-8.2V5l-6-2.5Z" stroke="currentColor" stroke-width="1.4"/><path d="m7.5 9.8 1.7 1.7 3.5-3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<div><p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Private by design</p><h2 id="privacy-title" class="text-[26px] font-semibold tracking-[-.04em]">Your images are processed in your browser</h2><p class="mt-3 max-w-[760px] text-sm leading-6 text-ink-subtle">The converter reads and converts selected images on your device. It does not upload them to a conversion server, and no account is needed. Your generated PDF remains in your browser until you choose to download or share it. The website host may still process routine connection data when delivering the page.</p><a href="/privacy/" class="mt-4 inline-flex text-sm text-ink-muted underline underline-offset-4 hover:text-white">Read the privacy details</a></div>
+			</div>
+		</section>
+
+		<section class="border-y border-hairline bg-[#08090a] py-14 sm:py-16" aria-labelledby="features-title">
+			<div class="container-shell"><p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Tools for this conversion</p><h2 id="features-title" class="text-[28px] font-semibold tracking-[-.04em] sm:text-[34px]">A few useful controls, all in one place</h2>
+				<ul class="mt-6 grid gap-x-8 gap-y-3 text-sm leading-6 text-ink-muted sm:grid-cols-2 lg:grid-cols-3">
+					<li>Combine multiple JPG or JPEG images</li><li>Reorder, rotate, remove, or add images</li><li>A4, Letter, or fit-to-image pages</li><li>Auto, portrait, or landscape orientation</li><li>None, small, or big page margins</li><li>Optimize toward a maximum PDF size</li><li>Set a custom target size</li><li>Convert with no size limit</li><li>Process images on your device</li>
+				</ul>
+			</div>
+		</section>
+
+		<section id="faq" class="container-shell py-14 sm:py-16" aria-labelledby="faq-title">
+			<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Frequently asked questions</p><h2 id="faq-title" class="text-[28px] font-semibold tracking-[-.04em] sm:text-[34px]">JPG to PDF, explained</h2>
+			<div class="mt-6 max-w-[850px] divide-y divide-hairline border-y border-hairline">
+				{faqs.map((faq) => <details class="group py-4"><summary class="flex cursor-pointer list-none items-start justify-between gap-5 text-sm font-medium text-ink marker:hidden focus-visible:outline-2 focus-visible:outline-primary"><span>{faq.question}</span><span aria-hidden="true" class="text-lg leading-5 text-ink-subtle transition group-open:rotate-45">+</span></summary><p class="max-w-[760px] pt-3 pr-8 text-sm leading-6 text-ink-subtle">{faq.answer}</p></details>)}
+			</div>
+		</section>
+
+		<section class="container-shell pb-14 sm:pb-16" aria-labelledby="final-cta-title"><div class="surface-panel flex flex-col items-start justify-between gap-5 p-6 sm:flex-row sm:items-center sm:p-8"><div><h2 id="final-cta-title" class="text-[24px] font-semibold tracking-[-.04em]">Ready to prepare your JPG images?</h2><p class="mt-2 text-sm text-ink-subtle">Set a page layout and maximum file size, then make your PDF locally.</p></div><a href="/#converter" class="btn-primary focus-ring shrink-0">Convert JPG to PDF</a></div></section>
+	</main>
+	<SiteFooter />
+	<script type="application/ld+json" set:html={JSON.stringify(webApplication)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </Layout>

@@ -1,23 +1,52 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	noIndex?: boolean;
+}
+
+const {
+	title = 'Free JPG to PDF Converter Online',
+	description = 'Convert JPG and JPEG images into a PDF in your browser. Choose a page layout and target file size, then download without creating an account.',
+	canonical = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site ?? 'https://jpgtopdfonline.in').href,
+	noIndex = false,
+} = Astro.props;
+const socialImage = new URL('/social-card.svg', Astro.site ?? 'https://jpgtopdfonline.in').href;
+---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#010102" />
+		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="JPG to PDF Online" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:image:type" content="image/svg+xml" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="JPG to PDF Online converter, with adjustable PDF settings" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImage} />
+		<meta name="twitter:image:alt" content="JPG to PDF Online converter, with adjustable PDF settings" />
+		{noIndex && <meta name="robots" content="noindex, follow" />}
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<slot name="head" />
+		<title>{title}</title>
 	</head>
-	<body>
+	<body class="min-h-screen bg-canvas text-ink antialiased">
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

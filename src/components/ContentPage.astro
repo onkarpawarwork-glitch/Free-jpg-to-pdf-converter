@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	eyebrow: string;
+	noIndex?: boolean;
+}
+
+const { title, description, eyebrow, noIndex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site ?? 'https://jpgtopdfonline.in');
+const breadcrumb = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jpgtopdfonline.in/' },
+		{ '@type': 'ListItem', position: 2, name: title, item: canonical.href },
+	],
+};
+---
+
+<Layout title={title} description={description} canonical={canonical.href} noIndex={noIndex}>
+	<SiteHeader />
+	<main id="main" class="container-shell min-h-[70vh] py-12 sm:py-16">
+		<div class="mx-auto max-w-[820px]">
+			<nav aria-label="Breadcrumb" class="mb-8 text-xs text-ink-subtle"><a href="/" class="hover:text-ink">Home</a><span class="px-2" aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+			<p class="mb-3 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">{eyebrow}</p>
+			<h1 class="max-w-[720px] text-[36px] leading-[1.1] font-semibold tracking-[-.05em] text-ink sm:text-[48px]">{title}</h1>
+			<div class="content-copy mt-8 max-w-[760px] space-y-7 text-sm leading-7 text-ink-subtle sm:text-base">
+				<slot />
+			</div>
+			<div class="mt-12 border-t border-hairline pt-6"><a href="/#converter" class="btn-primary focus-ring">Convert JPG to PDF</a></div>
+		</div>
+	</main>
+	<SiteFooter />
+	{!noIndex && <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />}
+</Layout>

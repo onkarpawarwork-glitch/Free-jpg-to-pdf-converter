@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+	<title id="title">Free JPG to PDF Converter Online</title>
+	<desc id="description">Convert JPG and JPEG images into a PDF in your browser.</desc>
+	<rect width="1200" height="630" fill="#010102"/>
+	<rect x="56" y="56" width="1088" height="518" rx="28" fill="#0f1011" stroke="#23252a" stroke-width="2"/>
+	<rect x="104" y="108" width="58" height="58" rx="13" fill="#5e6ad2"/>
+	<path d="M124 120h17l14 14v26a3 3 0 0 1-3 3h-28a4 4 0 0 1-4-4v-35a4 4 0 0 1 4-4Z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>
+	<path d="M141 121v14h14M126 147h19M126 154h13" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+	<text x="180" y="146" fill="#f7f8f8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="600">JPG to PDF Online</text>
+	<rect x="104" y="224" width="8" height="118" rx="4" fill="#5e6ad2"/>
+	<text x="140" y="280" fill="#f7f8f8" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" letter-spacing="-2">Free JPG to PDF</text>
+	<text x="140" y="352" fill="#f7f8f8" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" letter-spacing="-2">Converter Online</text>
+	<text x="140" y="414" fill="#a6abb5" font-family="Arial, Helvetica, sans-serif" font-size="27">Set a maximum size. Convert images in your browser.</text>
+	<rect x="140" y="470" width="256" height="54" rx="10" fill="#5e6ad2"/>
+	<text x="168" y="505" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="600">Your files stay on device</text>
+</svg>
