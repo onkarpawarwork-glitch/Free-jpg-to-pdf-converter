@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# Free JPG to PDF Converter
 
 ```sh
 npm create astro@latest -- --template basics
