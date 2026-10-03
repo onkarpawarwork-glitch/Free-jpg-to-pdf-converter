@@ -21,7 +21,7 @@ interface Props {
 	onCustomUnit: (unit: 'kb' | 'mb') => void;
 }
 
-const selectClasses = 'focus-ring mt-2 h-11 w-full rounded-lg border border-hairline-strong bg-surface-2 px-3 text-sm text-ink';
+const selectClasses = 'field-control focus-ring mt-2 h-11 w-full rounded-lg px-3 text-sm';
 
 function TargetLabel({ targetSize, customTargetBytes }: { targetSize: TargetSizePreset; customTargetBytes: number | null }) {
 	if (targetSize === 'none') return <>No size limit</>;
@@ -40,7 +40,7 @@ function TargetLabel({ targetSize, customTargetBytes }: { targetSize: TargetSize
 
 export function ConverterOptions({ value, customValue, customUnit, customTargetBytes, customError, busy, onChange, onCustomValue, onCustomUnit }: Props) {
 	return (
-		<section class="mt-6 rounded-xl border border-hairline bg-[#0b0c0d] p-4 sm:p-5" aria-labelledby="settings-heading">
+		<section class="mt-6 rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5" aria-labelledby="settings-heading">
 			<div class="mb-4">
 				<h3 id="settings-heading" class="text-sm font-semibold text-ink">PDF settings</h3>
 				<p class="mt-1 text-xs leading-5 text-ink-subtle">Choose how your pages should look and set a maximum file size.</p>
@@ -69,15 +69,15 @@ export function ConverterOptions({ value, customValue, customUnit, customTargetB
 			</div>
 
 			{value.targetSize === 'custom' && (
-				<div class="mt-4 rounded-lg border border-hairline bg-surface-1 p-3 sm:max-w-[360px]">
+				<div class="mt-4 rounded-lg border border-hairline bg-surface-2 p-3 sm:max-w-[360px]">
 					<label for="custom-target" class="mb-2 block text-xs font-medium text-ink-muted">Custom maximum file size</label>
 					<div class="flex gap-2">
-						<input id="custom-target" class="focus-ring h-11 min-w-0 flex-1 rounded-lg border border-hairline-strong bg-surface-2 px-3 text-sm text-ink" type="number" inputMode="decimal" min="1" max={customUnit === 'kb' ? 102400 : 100} step="any" value={customValue} onInput={(event) => onCustomValue(event.currentTarget.value)} aria-invalid={Boolean(customError)} aria-describedby={customError ? 'custom-target-error custom-target-hint' : 'custom-target-hint'} disabled={busy} />
-						<select class="focus-ring h-11 rounded-lg border border-hairline-strong bg-surface-2 px-3 text-sm text-ink" aria-label="Custom size unit" value={customUnit} onChange={(event) => onCustomUnit(event.currentTarget.value as 'kb' | 'mb')} disabled={busy}>
+						<input id="custom-target" class="field-control focus-ring h-11 min-w-0 flex-1 rounded-lg px-3 text-sm" type="number" inputMode="decimal" min="1" max={customUnit === 'kb' ? 102400 : 100} step="any" value={customValue} onInput={(event) => onCustomValue(event.currentTarget.value)} aria-invalid={Boolean(customError)} aria-describedby={customError ? 'custom-target-error custom-target-hint' : 'custom-target-hint'} disabled={busy} />
+						<select class="field-control focus-ring h-11 rounded-lg px-3 text-sm" aria-label="Custom size unit" value={customUnit} onChange={(event) => onCustomUnit(event.currentTarget.value as 'kb' | 'mb')} disabled={busy}>
 							<option value="kb">KB</option><option value="mb">MB</option>
 						</select>
 					</div>
-					{customError && <p id="custom-target-error" class="mt-2 text-xs text-[#ff9b9b]" role="alert">{customError}</p>}
+					{customError && <p id="custom-target-error" class="mt-2 text-xs text-danger" role="alert">{customError}</p>}
 					<p id="custom-target-hint" class="mt-2 text-[11px] leading-5 text-ink-subtle">Enter a value from 1 KB to 100 MB. <TargetLabel targetSize={value.targetSize} customTargetBytes={customTargetBytes} />.</p>
 				</div>
 			)}
@@ -87,7 +87,7 @@ export function ConverterOptions({ value, customValue, customUnit, customTargetB
 					<input class="size-4 accent-primary" type="checkbox" checked={value.mergeIntoOne} onChange={(event) => onChange('mergeIntoOne', event.currentTarget.checked)} disabled={busy} />
 					<span>Merge all images into one PDF</span>
 				</label>
-				<p class="text-xs text-ink-subtle">Selected target: <span class="font-medium text-ink-muted"><TargetLabel targetSize={value.targetSize} customTargetBytes={customTargetBytes} /></span></p>
+				<p class="text-xs text-ink-subtle">Selected target: <span class="ml-1 inline-flex rounded-full border border-hairline bg-surface-2 px-2.5 py-1 font-medium text-ink-muted"><TargetLabel targetSize={value.targetSize} customTargetBytes={customTargetBytes} /></span></p>
 			</div>
 		</section>
 	);

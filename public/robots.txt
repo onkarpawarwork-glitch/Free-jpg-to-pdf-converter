@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jpgtopdfonline.in/sitemap-index.xml
+Sitemap: https://jpgtopdfonline.pages.dev/sitemap-index.xml

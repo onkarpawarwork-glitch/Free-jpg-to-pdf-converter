@@ -11,10 +11,10 @@ interface Props {
 const {
 	title = 'Free JPG to PDF Converter Online',
 	description = 'Convert JPG and JPEG images into a PDF in your browser. Choose a page layout and target file size, then download without creating an account.',
-	canonical = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site ?? 'https://jpgtopdfonline.in').href,
+	canonical = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site ?? 'https://jpgtopdfonline.pages.dev').href,
 	noIndex = false,
 } = Astro.props;
-const socialImage = new URL('/social-card.svg', Astro.site ?? 'https://jpgtopdfonline.in').href;
+const socialImage = new URL('/social-card.svg', Astro.site ?? 'https://jpgtopdfonline.pages.dev').href;
 ---
 <!doctype html>
 <html lang="en">
@@ -22,21 +22,49 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? 'https://jpgtopdfo
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
-		<meta name="theme-color" content="#010102" />
-		<link rel="canonical" href={canonical} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<meta name="theme-color" content="#010102" id="theme-color" />
+		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+		<script is:inline>
+			(() => {
+				const key = 'jpgtopdf-theme';
+				let preference = 'system';
+				try {
+					const stored = localStorage.getItem(key);
+					if (stored === 'light' || stored === 'dark' || stored === 'system') preference = stored;
+				} catch {}
+				const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				const theme = preference === 'system' ? (dark ? 'dark' : 'light') : preference;
+				document.documentElement.dataset.theme = theme;
+				document.documentElement.dataset.themePreference = preference;
+				document.querySelector('#theme-color')?.setAttribute('content', theme === 'dark' ? '#010102' : '#f7f8fb');
+			})();
+		</script>
+		{!noIndex && <link rel="canonical" href={canonical} />}
+		<link rel="icon" type="image/png" href="/favicon-light-96x96.png" sizes="96x96" data-theme-favicon data-light-href="/favicon-light-96x96.png" data-dark-href="/favicon-96x96.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" data-theme-favicon data-light-href="/favicon-light.svg" data-dark-href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon-light.ico" data-theme-favicon data-light-href="/favicon-light.ico" data-dark-href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-light.png" data-theme-favicon data-light-href="/apple-touch-icon-light.png" data-dark-href="/apple-touch-icon.png" />
+		<script is:inline>
+			document.querySelectorAll('link[data-theme-favicon]').forEach((icon) => {
+				const dark = document.documentElement.dataset.theme === 'dark';
+				const href = icon.getAttribute(dark ? 'data-dark-href' : 'data-light-href');
+				if (href) icon.setAttribute('href', href);
+			});
+		</script>
+		<meta name="apple-mobile-web-app-title" content="jpgtopdfonline.pages.dev" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="JPG to PDF Online" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonical} />
+		{!noIndex && <meta property="og:url" content={canonical} />}
 		<meta property="og:image" content={socialImage} />
 		<meta property="og:image:type" content="image/svg+xml" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="JPG to PDF Online converter, with adjustable PDF settings" />
 		<meta name="twitter:card" content="summary" />
+		{!noIndex && <meta name="twitter:url" content={canonical} />}
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialImage} />
@@ -47,6 +75,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? 'https://jpgtopdfo
 		<title>{title}</title>
 	</head>
 	<body class="min-h-screen bg-canvas text-ink antialiased">
+		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-medium focus:text-black focus:outline-2 focus:outline-offset-2 focus:outline-primary">Skip to main content</a>
 		<slot />
 	</body>
 </html>

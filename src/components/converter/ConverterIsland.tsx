@@ -296,15 +296,15 @@ export function ConverterIsland() {
 				<input ref={fileInput} class="sr-only" id="jpg-file-input" type="file" accept="image/jpeg,.jpg,.jpeg" multiple onChange={onInputChange} disabled={busy || images.length >= MAX_IMAGES} tabIndex={-1} aria-describedby="upload-help privacy-note" />
 				<button
 					type="button"
-					class="group grid min-h-[168px] w-full place-items-center rounded-xl border border-dashed border-hairline-strong bg-[#0b0c0d] px-4 py-6 text-center transition hover:border-primary hover:bg-[#101116] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[184px]"
+					class="group grid min-h-[168px] w-full place-items-center rounded-xl border border-dashed border-hairline-strong bg-upload-surface px-4 py-6 text-center transition-[border-color,background-color,transform] hover:border-primary hover:bg-upload-hover active:scale-[.998] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[184px]"
 					onClick={openPicker}
-					onDragOver={(event) => { event.preventDefault(); event.currentTarget.classList.add('border-primary', 'bg-[#101116]'); }}
-					onDragLeave={(event) => event.currentTarget.classList.remove('border-primary', 'bg-[#101116]')}
-					onDrop={(event) => { event.currentTarget.classList.remove('border-primary', 'bg-[#101116]'); onDropFiles(event); }}
+					onDragOver={(event) => { event.preventDefault(); event.currentTarget.classList.add('border-primary', 'bg-upload-hover'); }}
+					onDragLeave={(event) => event.currentTarget.classList.remove('border-primary', 'bg-upload-hover')}
+					onDrop={(event) => { event.currentTarget.classList.remove('border-primary', 'bg-upload-hover'); onDropFiles(event); }}
 					disabled={busy || images.length >= MAX_IMAGES}
 				>
 					<span>
-						<span class="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-hairline-strong bg-surface-2 text-ink-muted transition group-hover:border-primary/50 group-hover:text-white" aria-hidden="true">
+						<span class="mx-auto mb-3 grid size-11 place-items-center rounded-xl border border-hairline-strong bg-surface-2 text-ink-muted transition group-hover:border-primary/50 group-hover:text-primary" aria-hidden="true">
 							<svg class="size-5" viewBox="0 0 20 20" fill="none"><path d="M10 13V4m0 0L6.5 7.5M10 4l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 12.5v2.2a.8.8 0 0 0 .8.8h9.4a.8.8 0 0 0 .8-.8v-2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 						</span>
 						<span class="block text-sm font-medium text-ink">{isInspecting ? 'Checking your images…' : images.length ? 'Drop more JPG images here' : 'Drop JPG images here to get started'}</span>
@@ -314,7 +314,7 @@ export function ConverterIsland() {
 				</button>
 				<p id="privacy-note" class="mt-3 flex items-center justify-center gap-2 text-xs text-ink-subtle"><svg class="size-4 shrink-0 text-ink-muted" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5 4 5v4.3c0 3.8 2.6 6.6 6 8.2 3.4-1.6 6-4.4 6-8.2V5l-6-2.5Z" stroke="currentColor" stroke-width="1.4"/><path d="m7.5 9.8 1.7 1.7 3.5-3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Your files never leave your device.</p>
 
-				{error && <p class="mt-4 rounded-lg border border-[#633638] bg-[#211214] px-3 py-2.5 text-xs leading-5 text-[#ffb3b3]" role="alert">{error}</p>}
+				{error && <p class="mt-4 rounded-lg border border-danger-border bg-danger-surface px-3 py-2.5 text-xs leading-5 text-danger" role="alert">{error}</p>}
 				{status && <p class="sr-only" role="status" aria-live="polite">{status}</p>}
 
 				{images.length > 0 && (
@@ -348,7 +348,7 @@ export function ConverterIsland() {
 					</button>
 				</div>
 				{!images.length && <p class="mt-2 text-right text-[11px] text-ink-subtle">Add at least one image to convert.</p>}
-				{customInvalid && <p class="mt-2 text-right text-[11px] text-[#ff9b9b]">Fix the custom target size to continue.</p>}
+				{customInvalid && <p class="mt-2 text-right text-[11px] text-danger">Fix the custom target size to continue.</p>}
 
 				{isConverting && progress && (
 					<div class="mt-4 rounded-xl border border-hairline bg-surface-2 p-4" role="status" aria-live="polite">
@@ -356,7 +356,7 @@ export function ConverterIsland() {
 							<p class="font-medium text-ink">{progress.phase === 'reading' ? 'Preparing your images' : 'Optimizing your PDF'}</p>
 							<p class="text-ink-subtle">{progress.phase === 'optimizing' ? `Pass ${progress.iteration} of ${progress.maximumIterations}` : `Image ${progress.iteration} of ${images.length}`}</p>
 						</div>
-						<div class="h-1.5 overflow-hidden rounded-full bg-[#292a2f]" role="progressbar" aria-label="PDF conversion progress" aria-valuemin={0} aria-valuemax={progress.maximumIterations} aria-valuenow={progress.iteration}>
+						<div class="h-1.5 overflow-hidden rounded-full bg-surface-3" role="progressbar" aria-label="PDF conversion progress" aria-valuemin={0} aria-valuemax={progress.maximumIterations} aria-valuenow={progress.iteration}>
 							<div class="h-full rounded-full bg-primary transition-[width] duration-200" style={{ width: `${Math.max(8, (progress.iteration / Math.max(1, progress.maximumIterations)) * 100)}%` }}></div>
 						</div>
 						<p class="mt-2 text-[11px] leading-5 text-ink-subtle">Your images are processed privately in this browser. Please keep this tab open.</p>

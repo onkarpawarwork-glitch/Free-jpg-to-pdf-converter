@@ -17,9 +17,9 @@ export function ConversionResult({ result, onDownload, onStartOver }: Props) {
 	const fileCount = result.images.length;
 	const notMet = result.targetByteSize !== null && !result.targetMet;
 	return (
-		<section class="mt-5 rounded-xl border border-[#34463b] bg-[#101511] p-4 sm:p-5" aria-labelledby="result-heading" aria-live="polite" tabIndex={-1}>
+		<section class={`mt-5 rounded-xl border ${result.targetMet ? 'border-success-border' : 'border-warning-border'} ${result.targetMet ? 'bg-success-surface' : 'bg-warning-surface'} p-4 sm:p-5`} aria-labelledby="result-heading" aria-live="polite" tabIndex={-1}>
 			<div class="flex items-start gap-3">
-				<span class="grid size-10 shrink-0 place-items-center rounded-full border border-[#34503e] bg-[#18231b] text-[#8bd3a0]" aria-hidden="true">
+				<span class={`grid size-10 shrink-0 place-items-center rounded-full border ${result.targetMet ? 'border-success-border bg-success-surface text-success' : 'border-warning-border bg-warning-surface text-warning'}`} aria-hidden="true">
 					{result.targetMet ? <svg class="size-5" viewBox="0 0 20 20" fill="none"><path d="m4.5 10.2 3.5 3.4 7.5-7.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> : <span class="text-lg">!</span>}
 				</span>
 				<div class="min-w-0 flex-1">
@@ -30,13 +30,13 @@ export function ConversionResult({ result, onDownload, onStartOver }: Props) {
 			</div>
 
 			{notMet && (
-				<div class="mt-4 rounded-lg border border-[#58443a] bg-[#211a16] p-3 text-xs leading-5 text-[#e6c0a6]">
+				<div class="mt-4 rounded-lg border border-warning-border bg-warning-surface p-3 text-xs leading-5 text-warning">
 					{result.optimizationStatus === 'impossible-target'
 						? `Smallest achievable is ${formatSize(result.finalByteSize)} for ${fileCount} ${fileCount === 1 ? 'image' : 'images'}. Remove images or choose a higher limit.`
 						: `The target was not reached within the optimization limit. The best result found is ${formatSize(result.finalByteSize)}. Choose a higher limit to meet the target.`}
 				</div>
 			)}
-			{result.targetMet && result.targetByteSize !== null && <p class="mt-3 text-xs text-[#8bd3a0]">The requested maximum size was met.</p>}
+			{result.targetMet && result.targetByteSize !== null && <p class="mt-3 flex items-center gap-2 text-xs font-medium text-success"><span class="grid size-4 place-items-center rounded-full border border-success-border text-[10px]" aria-hidden="true">✓</span>The requested maximum size was met.</p>}
 			{result.optimizationStatus === 'no-limit' && <p class="mt-3 text-xs text-ink-subtle">Created at high quality with no target size.</p>}
 
 			<div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">

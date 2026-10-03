@@ -48,7 +48,7 @@ export function ImageQueue({ images, busy, onAdd, onRemove, onMove, onShift, onR
 						<li
 							key={image.id}
 							draggable={!busy}
-							class={`group flex items-center gap-3 rounded-xl border bg-surface-2 p-3 sm:gap-4 ${draggedId === image.id ? 'border-primary' : 'border-hairline'}`}
+							class={`group flex items-center gap-3 rounded-xl border bg-surface-2 p-3 transition-colors hover:border-hairline-strong sm:gap-4 ${draggedId === image.id ? 'border-primary' : 'border-hairline'}`}
 							onDragStart={(event: JSX.TargetedDragEvent<HTMLLIElement>) => {
 								setDraggedId(image.id);
 								event.dataTransfer?.setData('text/plain', image.id);
@@ -64,7 +64,7 @@ export function ImageQueue({ images, busy, onAdd, onRemove, onMove, onShift, onR
 							}}
 						>
 							<span class="hidden select-none text-ink-tertiary sm:inline" aria-hidden="true">⠿</span>
-							<div class="grid size-[58px] shrink-0 place-items-center overflow-hidden rounded-lg border border-hairline bg-[#090a0b]">
+							<div class="grid size-[58px] shrink-0 place-items-center overflow-hidden rounded-lg border border-hairline bg-surface-1">
 								<img
 									src={image.url}
 									alt={`Preview of ${image.file.name}`}
@@ -89,7 +89,7 @@ export function ImageQueue({ images, busy, onAdd, onRemove, onMove, onShift, onR
 									<button type="button" class="focus-ring grid size-10 place-items-center rounded-lg text-ink-subtle transition hover:bg-surface-3 hover:text-ink disabled:opacity-40" aria-label={`Move ${image.file.name} up`} title="Move up" onClick={() => onShift(image.id, -1)} disabled={busy || index === 0}><span aria-hidden="true">↑</span></button>
 									<button type="button" class="focus-ring grid size-10 place-items-center rounded-lg text-ink-subtle transition hover:bg-surface-3 hover:text-ink disabled:opacity-40" aria-label={`Move ${image.file.name} down`} title="Move down" onClick={() => onShift(image.id, 1)} disabled={busy || index === images.length - 1}><span aria-hidden="true">↓</span></button>
 								</div>
-								<button type="button" class="focus-ring grid size-10 place-items-center rounded-lg text-ink-subtle transition hover:bg-[#351c20] hover:text-white disabled:opacity-40" aria-label={`Remove ${image.file.name}`} title="Remove image" onClick={() => onRemove(image.id)} disabled={busy}>
+								<button type="button" class="focus-ring grid size-10 place-items-center rounded-lg text-ink-subtle transition hover:bg-danger-surface hover:text-danger disabled:opacity-40" aria-label={`Remove ${image.file.name}`} title="Remove image" onClick={() => onRemove(image.id)} disabled={busy}>
 									<svg class="size-[18px]" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 6 8 8m0-8-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 								</button>
 							</div>

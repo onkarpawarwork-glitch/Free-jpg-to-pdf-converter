@@ -1,15 +1,72 @@
-<header class="border-b border-hairline">
-	<nav class="container-shell flex min-h-[68px] items-center justify-between gap-4" aria-label="Main navigation">
-		<a href="/" class="focus-ring flex items-center gap-3 rounded-md" aria-label="JPG to PDF home">
-			<span class="grid size-9 shrink-0 place-items-center rounded-lg bg-primary text-white" aria-hidden="true">
-				<svg viewBox="0 0 24 24" class="size-5" fill="none"><path d="M7 3.75h6.5L19 9.2v10.05a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-13.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/><path d="M13 4v5h5M8 15h8M8 18h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-			</span>
-			<span class="text-[14px] font-semibold tracking-[-.02em] text-ink sm:text-[15px]">JPG to PDF <span class="font-normal text-ink-subtle">Online</span></span>
+<header class="border-b border-hairline bg-canvas">
+	<nav class="container-shell flex min-h-[68px] items-center justify-between gap-2 sm:gap-4" aria-label="Main navigation">
+		<a href="/" class="focus-ring flex min-w-0 items-center gap-2 rounded-md font-semibold tracking-[-.03em] text-ink" aria-label="JPG to PDF Online home">
+			<img src="/brand/logo-mark-light.svg" alt="" aria-hidden="true" width="32" height="32" class="site-logo-light size-8" />
+			<img src="/brand/logo-mark.svg" alt="" aria-hidden="true" width="32" height="32" class="site-logo-dark size-8" />
+			<span>JPG to PDF Online</span>
 		</a>
-		<div class="flex items-center gap-1 sm:gap-2">
+		<div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
 			<a href="/#how-to-convert" class="focus-ring hidden rounded-md px-2 py-2 text-sm text-ink-muted transition hover:text-ink sm:inline-flex sm:px-3">How it works</a>
 			<a href="/about/" class="focus-ring hidden rounded-md px-2 py-2 text-sm text-ink-muted transition hover:text-ink md:inline-flex md:px-3">About</a>
-			<a href="/#converter" class="btn-secondary focus-ring">Convert images</a>
+			<details class="theme-menu" data-theme-menu>
+				<summary class="focus-ring" aria-label="Choose color theme" title="Choose color theme">
+					<svg class="size-[18px]" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M10 3a7 7 0 0 0 0 14V3Z" fill="currentColor"/><path d="M10 3v14" stroke="currentColor" stroke-width="1.2"/></svg>
+				</summary>
+				<div class="theme-popover">
+					<p class="px-2.5 pb-1 pt-2 text-[11px] font-semibold tracking-[.08em] text-ink-subtle uppercase">Appearance</p>
+					<button type="button" class="theme-choice" data-theme-choice="system" aria-pressed="false"><span>System</span><span class="text-[11px] text-ink-subtle">Auto</span></button>
+					<button type="button" class="theme-choice" data-theme-choice="light" aria-pressed="false"><span>Light</span><span class="theme-check" aria-hidden="true">✓</span></button>
+					<button type="button" class="theme-choice" data-theme-choice="dark" aria-pressed="false"><span>Dark</span><span class="theme-check" aria-hidden="true">✓</span></button>
+				</div>
+			</details>
+			<a href="/#converter" class="btn-secondary focus-ring min-h-10 px-3 text-[13px] sm:px-4 sm:text-sm">Convert images</a>
 		</div>
 	</nav>
 </header>
+
+<script is:inline>
+	(() => {
+		const root = document.documentElement;
+		const menu = document.querySelector('[data-theme-menu]');
+		if (!(menu instanceof HTMLDetailsElement)) return;
+		const choices = menu.querySelectorAll('[data-theme-choice]');
+		const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+		const applyTheme = (preference, save) => {
+			const theme = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference;
+			root.dataset.theme = theme;
+			root.dataset.themePreference = preference;
+			document.querySelector('#theme-color')?.setAttribute('content', theme === 'dark' ? '#010102' : '#f7f8fb');
+			document.querySelectorAll('link[data-theme-favicon]').forEach((icon) => {
+				const href = icon.getAttribute(theme === 'dark' ? 'data-dark-href' : 'data-light-href');
+				if (href) icon.setAttribute('href', href);
+			});
+			choices.forEach((choice) => choice.setAttribute('aria-pressed', String(choice.dataset.themeChoice === preference)));
+			if (save) {
+				try { localStorage.setItem('jpgtopdf-theme', preference); } catch {}
+			}
+		};
+
+		applyTheme(root.dataset.themePreference || 'system', false);
+		choices.forEach((choice) => choice.addEventListener('click', () => {
+			const preference = choice.dataset.themeChoice;
+			if (preference !== 'system' && preference !== 'light' && preference !== 'dark') return;
+			applyTheme(preference, true);
+			menu.open = false;
+			menu.querySelector('summary')?.focus();
+		}));
+
+		media.addEventListener('change', () => {
+			if (root.dataset.themePreference === 'system') applyTheme('system', false);
+		});
+		document.addEventListener('click', (event) => {
+			if (event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+		});
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && menu.open) {
+				menu.open = false;
+				menu.querySelector('summary')?.focus();
+			}
+		});
+	})();
+</script>

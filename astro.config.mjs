@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://jpgtopdfonline.in',
+	site: 'https://jpgtopdfonline.pages.dev',
 	integrations: [preact(), sitemap({ filter: (page) => !page.endsWith('/404/') })],
 	vite: {
 		plugins: [tailwindcss()],
