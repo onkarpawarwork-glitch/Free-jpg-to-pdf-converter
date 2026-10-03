@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'when-200kb',
+		heading: 'When a 200 KB maximum may fit',
+		paragraphs: [
+			'A 200 KB cap is a strict target for a complete PDF. It may be practical for a short document with a small number of compact images, but high-resolution photos or multiple detailed pages can exceed it. Check whether the portal’s limit applies to the whole PDF or to each attachment before converting.',
+			'Because every page contributes to one merged file, adding more images leaves less of the total allowance for each page. A small target can require noticeable image optimization.',
+		],
+	},
+	{
+		id: 'set-200kb',
+		heading: 'Set 200 KB in the converter',
+		paragraphs: [
+			'Choose 200 KB from Maximum PDF size, add only the images needed for the document, and convert. Check the reported result and inspect the downloaded pages. If the target is not met, use fewer required images or select a higher maximum when the upload rules allow it.',
+		],
+		note: 'A 200 KB target is not a guarantee. The file size and readable image detail depend on your source images and the number of pages.',
+	},
+];
+
+const faqs = [
+	{ question: 'Can every set of pictures fit under 200 KB?', answer: 'No. The page count and image detail affect the finished PDF. The converter reports whether it met 200 KB; if it cannot, consider fewer required pictures or a higher permitted maximum.' },
+	{ question: 'Will image detail change at a 200 KB target?', answer: 'It can. A very small maximum may require smaller image dimensions or lower JPEG quality. Review the downloaded PDF before sending it.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-under-500kb/', label: 'Try a 500 KB maximum' },
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Enter another custom limit' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'Learn about image quality' },
+];
+---
+
+<SeoLandingPage
+	title="Convert JPG to PDF Under 200 KB"
+	description="Set a 200 KB maximum for a JPG-to-PDF conversion. Learn what affects the result, how to choose the target, and why it may not fit every image set."
+	eyebrow="200 KB maximum"
+	intro="Need a compact attachment? Choose 200 KB under Maximum PDF size to work toward a small combined PDF. Whether the file can meet that limit depends on the images and page count."
+	sections={sections}
+	converterDescription="Select 200 KB under Maximum PDF size, then add the JPG or JPEG files you need. The converter checks the generated PDF against that maximum."
+	faqs={faqs}
+	related={related}
+/>

@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'one-mb-cap',
+		heading: 'Choose 1 MB when the upload limit allows it',
+		paragraphs: [
+			'A 1 MB maximum gives the converter more room than the smaller 200 KB and 500 KB presets. That extra room may help preserve image detail in a short set of photos, but the result still depends on source dimensions and how many pages you merge.',
+			'Use the size limit from the portal that will receive the file. If the portal sets a per-file maximum below 1 MB, select that smaller cap instead.',
+		],
+	},
+	{
+		id: 'one-mb-conversion',
+		heading: 'Select 1 MB and review the PDF',
+		paragraphs: [
+			'Choose 1 MB under Maximum PDF size, arrange the JPG/JPEG pages, and convert. Check the result message and open the PDF to make sure the pages are in order and readable. If the document does not fit, remove images that are not required or use a larger limit only when it is allowed.',
+		],
+		note: 'The selected value is a maximum target, not a promise that the final document will be exactly 1 MB or smaller for every set of images.',
+	},
+];
+
+const faqs = [
+	{ question: 'How do I set the PDF maximum to 1 MB?', answer: 'Open Maximum PDF size in the converter and choose 1 MB. Add your JPG/JPEG files and convert; the result reports whether the selected maximum was met.' },
+	{ question: 'Does a 1 MB maximum preserve all original detail?', answer: 'It provides more room than smaller caps, but it does not guarantee unchanged image quality. The number and detail of your images affect the result.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-under-500kb/', label: 'Try a smaller 500 KB maximum' },
+	{ href: '/jpg-to-pdf-under-2mb/', label: 'Use a 2 MB maximum' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'Balance the size target with image detail' },
+];
+---
+
+<SeoLandingPage
+	title="Convert JPG to PDF Under 1 MB"
+	description="Choose a 1 MB maximum when converting JPG or JPEG images to PDF. Learn how the cap affects a multi-page file and verify the final result."
+	eyebrow="1 MB maximum"
+	intro="If an upload form allows up to 1 MB, choose that maximum in the converter. The larger cap may leave more room for image detail than smaller presets, but it does not guarantee every document will fit."
+	sections={sections}
+	converterDescription="Select 1 MB under Maximum PDF size, add your JPG or JPEG images, and check the reported result after conversion."
+	faqs={faqs}
+	related={related}
+/>

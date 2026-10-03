@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'supported-images',
+		heading: 'Use JPG or JPEG image files',
+		paragraphs: [
+			'This online image-to-PDF converter is for JPG and JPEG files. Select one image or a set of images, then arrange the page order and choose a page size, orientation, and margin. It is not a general converter for every image format, so check your file type before opening the picker.',
+		],
+	},
+	{
+		id: 'local-process',
+		heading: 'Convert in the browser without an account',
+		paragraphs: [
+			'The converter creates the PDF on your device in the browser. The selected images are not sent to a conversion server, and you do not need to install software or create an account to use the tool.',
+			'You can merge several pictures, set page options, and choose a maximum PDF size when a destination has an upload limit. The output depends on the images and selected settings, so check the downloaded file against the destination’s requirements.',
+		],
+	},
+];
+
+const faqs = [
+	{ question: 'Which image formats can I convert?', answer: 'This tool accepts JPG and JPEG images. If your image is saved in another format, this converter cannot process that file.' },
+	{ question: 'Is this image-to-PDF converter free to use online?', answer: 'Yes. You can use the JPG/JPEG converter in your browser without an account or a software installation.' },
+	{ question: 'Are my pictures uploaded for conversion?', answer: 'The converter processes the selected image files in your browser and does not send them to a conversion server. The website host still serves the page and its static assets.' },
+];
+
+const related = [
+	{ href: '/merge-jpg-to-pdf/', label: 'Merge JPG images into one PDF' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'JPG to PDF with more image detail' },
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Convert with a custom size target' },
+];
+---
+
+<SeoLandingPage
+	title="Free JPG and JPEG Image to PDF Converter Online"
+	description="Convert JPG and JPEG images to PDF online for free. Merge images, choose page settings, and set an optional file-size target in your browser."
+	eyebrow="Image to PDF"
+	intro="Convert JPG or JPEG pictures to PDF online for free, without an account or installation. This focused image-to-PDF converter supports JPG/JPEG files, lets you arrange several pictures, and creates the document in your browser."
+	sections={sections}
+	converterDescription="Select JPG or JPEG files, choose the page layout, and set a maximum PDF size only when you need one. Your source images stay on your device during conversion."
+	faqs={faqs}
+	related={related}
+/>

@@ -8,6 +8,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
+		"deploy": "npm run build && wrangler pages deploy ./dist --project-name=jpgtopdfonline",
 		"preview": "astro preview",
 		"astro": "astro",
 		"test": "vitest run"
@@ -26,6 +27,7 @@
 	},
 	"devDependencies": {
 		"typescript": "^7.0.2",
-		"vitest": "^5.0.2"
+		"vitest": "^5.0.2",
+		"wrangler": "^4.147.0"
 	}
 }

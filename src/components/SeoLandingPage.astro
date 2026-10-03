@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import Converter from './Converter.astro';
+
+interface ContentSection {
+	id: string;
+	heading: string;
+	paragraphs: string[];
+	bullets?: string[];
+	note?: string;
+}
+
+interface FAQ {
+	question: string;
+	answer: string;
+}
+
+interface RelatedPage {
+	href: string;
+	label: string;
+}
+
+interface Props {
+	title: string;
+	description: string;
+	eyebrow: string;
+	intro: string;
+	sections: ContentSection[];
+	converterDescription: string;
+	faqs: FAQ[];
+	related: RelatedPage[];
+}
+
+const { title, description, eyebrow, intro, sections, converterDescription, faqs, related } = Astro.props;
+const canonicalPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = new URL(canonicalPath, Astro.site ?? 'https://jpgtopdfonline.pages.dev').href;
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://jpgtopdfonline.pages.dev/' },
+		{ '@type': 'ListItem', position: 2, name: title, item: canonical },
+	],
+};
+const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(({ question, answer }) => ({
+		'@type': 'Question',
+		name: question,
+		acceptedAnswer: { '@type': 'Answer', text: answer },
+	})),
+};
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+	<SiteHeader />
+	<main id="main" class="container-shell py-12 sm:py-16">
+		<div class="mx-auto max-w-[820px]">
+			<nav aria-label="Breadcrumb" class="mb-8 text-xs text-ink-subtle"><a href="/" class="hover:text-ink">Home</a><span class="px-2" aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+			<p class="mb-3 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">{eyebrow}</p>
+			<h1 class="max-w-[760px] text-[36px] leading-[1.1] font-semibold tracking-[-.05em] text-ink sm:text-[48px]">{title}</h1>
+			<p class="mt-5 max-w-[760px] text-base leading-7 text-ink-subtle sm:text-lg">{intro}</p>
+		</div>
+
+		<div class="content-copy mx-auto mt-8 max-w-[820px] space-y-8 text-sm leading-7 text-ink-subtle sm:text-base">
+			{sections.map((section) => (
+				<section aria-labelledby={section.id} class="space-y-3">
+					<h2 id={section.id} class="text-xl font-semibold tracking-tight text-ink">{section.heading}</h2>
+					{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+					{section.bullets && <ul class="list-disc space-y-1 pl-5">{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
+					{section.note && <p class="surface-panel p-4 text-sm leading-6">{section.note}</p>}
+				</section>
+			))}
+		</div>
+
+		<section id="converter" class="mx-auto mt-10 max-w-[820px] scroll-mt-8" aria-labelledby="seo-converter-title">
+			<div class="mb-4">
+				<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Use the existing converter</p>
+				<h2 id="seo-converter-title" class="text-[26px] font-semibold tracking-[-.04em] text-ink sm:text-[30px]">Convert JPG to PDF in your browser</h2>
+				<p class="mt-2 max-w-[760px] text-sm leading-6 text-ink-subtle">{converterDescription}</p>
+			</div>
+			<Converter />
+		</section>
+
+		<section class="mx-auto mt-12 max-w-[820px] border-t border-hairline pt-8" aria-labelledby="seo-faq-title">
+			<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">More details</p>
+			<h2 id="seo-faq-title" class="text-[26px] font-semibold tracking-[-.04em] text-ink sm:text-[30px]">Frequently asked questions</h2>
+			<div class="mt-5 max-w-[850px] divide-y divide-hairline border-y border-hairline">
+				{faqs.map((faq) => <details class="group py-4"><summary class="flex cursor-pointer list-none items-start justify-between gap-5 text-sm font-medium text-ink marker:hidden focus-visible:outline-2 focus-visible:outline-primary"><span>{faq.question}</span><span aria-hidden="true" class="text-lg leading-5 text-ink-subtle transition group-open:rotate-45">+</span></summary><p class="max-w-[760px] pt-3 pr-8 text-sm leading-6 text-ink-subtle">{faq.answer}</p></details>)}
+			</div>
+		</section>
+
+		<nav class="mx-auto mt-10 max-w-[820px] border-t border-hairline pt-8" aria-label="Related JPG to PDF pages">
+			<h2 class="text-lg font-semibold text-ink">Related JPG to PDF guides</h2>
+			<ul class="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm">
+				<li><a class="text-ink-muted underline decoration-hairline-strong underline-offset-4 hover:text-ink" href="/">JPG to PDF Online</a></li>
+				{related.map((page) => <li><a class="text-ink-muted underline decoration-hairline-strong underline-offset-4 hover:text-ink" href={page.href}>{page.label}</a></li>)}
+			</ul>
+		</nav>
+	</main>
+	<SiteFooter />
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Layout>

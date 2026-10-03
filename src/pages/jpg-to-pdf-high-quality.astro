@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'quality-and-size',
+		heading: 'Balance image detail with your file-size limit',
+		paragraphs: [
+			'A PDF’s size and the detail visible in its images are connected. A strict maximum can require the converter to reduce image dimensions or JPEG quality; a larger maximum gives it more room. If a destination has no size cap, choose “No size limit” instead of optimizing toward an unnecessary target.',
+			'Keep the original JPG or JPEG files until you have checked the downloaded PDF. Look at text, fine lines, and small details at the size you will actually use. The best setting depends on the source image and the requirements of the form or recipient.',
+		],
+	},
+	{
+		id: 'page-settings',
+		heading: 'Set up the PDF pages before converting',
+		paragraphs: [
+			'Choose A4, Letter, or Fit to image, then select an orientation and margin. Fit to image is useful when you want page dimensions to follow the picture. These page settings affect the document layout; they do not restore detail that is absent from the original image.',
+			'For a group of images, arrange the pages first and check the result before sending it. Conversion happens in your browser, so the source files remain available on your device while you decide whether the output meets your needs.',
+		],
+	},
+];
+
+const faqs = [
+	{ question: 'Does the PDF keep every JPG pixel unchanged?', answer: 'The converter places your JPG or JPEG images into a PDF and may optimize image dimensions or quality to work toward the maximum size you choose. It does not promise bit-for-bit preservation. Use a larger maximum or no size limit when the destination allows it, then inspect the PDF.' },
+	{ question: 'What should I choose for the highest practical quality?', answer: 'Start with the original image files and use a larger maximum or “No size limit” if you do not have a strict upload cap. A lower maximum can require more compression, so check the PDF at its intended viewing size.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Choose a custom PDF size' },
+	{ href: '/jpg-to-pdf-under-2mb/', label: 'JPG to PDF under 2 MB' },
+	{ href: '/merge-jpg-to-pdf/', label: 'Merge JPG images into one PDF' },
+];
+---
+
+<SeoLandingPage
+	title="High-Quality JPG to PDF Converter"
+	description="Convert JPG and JPEG images to PDF while keeping as much detail as practical. Choose a suitable maximum file size and inspect the result before sharing."
+	eyebrow="Image quality"
+	intro="To retain more image detail, start with your original JPG or JPEG files and avoid an unnecessarily low size cap. A larger maximum or no limit gives the converter more room; a strict cap can require image optimization."
+	sections={sections}
+	converterDescription="Add your JPG or JPEG files, set page options, and choose a maximum only if you need one. The converter reports whether it met the selected target."
+	faqs={faqs}
+	related={related}
+/>

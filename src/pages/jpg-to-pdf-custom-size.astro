@@ -1,0 +1,51 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'enter-target',
+		heading: 'Enter the maximum size you need',
+		paragraphs: [
+			'In PDF settings, choose “Custom” under Maximum PDF size, enter a value, and select KB or MB. The available range is 1 KB to 100 MB. Check the destination’s upload limit before choosing your target, including any separate limits for individual attachments.',
+		],
+		bullets: [
+			'Use a smaller number when a form sets a strict maximum.',
+			'Choose a higher maximum when the portal allows more room and image detail matters.',
+			'Select “No size limit” when you do not need optimization toward a cap.',
+		],
+	},
+	{
+		id: 'target-limitations',
+		heading: 'A custom target is a limit to work toward',
+		paragraphs: [
+			'The converter checks the PDF it actually creates and reports whether it met your selected maximum. Some image sets cannot fit under a very small target; this depends on image count, dimensions, and detail. The tool returns the best result it could create rather than promising every target can be reached.',
+			'If the target is missed, try fewer required images or raise the maximum if the receiving site permits it. A tighter limit can reduce image dimensions or quality, so inspect the PDF before submitting it.',
+		],
+	},
+];
+
+const faqs = [
+	{ question: 'What custom PDF sizes can I enter?', answer: 'The custom control accepts targets from 1 KB up to 100 MB. Choose KB or MB beside the number field.' },
+	{ question: 'Will every image set fit the exact custom size?', answer: 'No. The final PDF depends on the number and detail of your images. The converter checks the actual output and reports whether it met the maximum you selected.' },
+	{ question: 'Can I convert without a size target?', answer: 'Yes. Choose “No size limit” in PDF settings when you do not need the converter to optimize toward a maximum.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-under-200kb/', label: 'Target 200 KB' },
+	{ href: '/jpg-to-pdf-under-500kb/', label: 'Target 500 KB' },
+	{ href: '/jpg-to-pdf-under-1mb/', label: 'Target 1 MB' },
+	{ href: '/jpg-to-pdf-under-2mb/', label: 'Target 2 MB' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'Balance size with image quality' },
+];
+---
+
+<SeoLandingPage
+	title="JPG to PDF with a Custom File Size"
+	description="Convert JPG or JPEG images to PDF with a custom maximum size from 1 KB to 100 MB. See how targets work and what to do if one cannot be met."
+	eyebrow="Custom PDF size"
+	intro="Set a specific maximum for your JPG-to-PDF file when an upload form gives you a custom limit. Enter a value in KB or MB in the existing converter, then check whether the generated PDF meets it."
+	sections={sections}
+	converterDescription="Choose “Custom” in Maximum PDF size, enter the limit allowed by your destination, and select KB or MB. The result reports whether the target was met."
+	faqs={faqs}
+	related={related}
+/>

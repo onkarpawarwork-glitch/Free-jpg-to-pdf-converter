@@ -4,6 +4,8 @@ import Converter from '../components/Converter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
+const googleSiteVerificationMeta = '<meta name="google-site-verification" content="VTAhCYSTnTYPOMJXYiR9a7X2RI821mZBFUDFRro6tFI" />';
+
 const faqs = [
 	{ question: 'How do I convert JPG to PDF?', answer: 'Choose JPG or JPEG images from your device, arrange or rotate them if needed, select page settings and a target size, then choose Convert to PDF and download the result.' },
 	{ question: 'Is this JPG to PDF converter free to use?', answer: 'Yes. You can use the converter without creating an account or paying to convert your images.' },
@@ -37,6 +39,7 @@ const faqSchema = {
 ---
 
 <Layout>
+	<Fragment slot="head" set:html={googleSiteVerificationMeta} />
 	<SiteHeader />
 	<main id="main">
 		<section aria-labelledby="page-title" class="container-shell pt-8 pb-12 sm:pt-10 sm:pb-16">
@@ -75,10 +78,10 @@ const faqSchema = {
 				<p class="mb-2 text-xs font-semibold tracking-[.12em] text-ink-subtle uppercase">Choose a useful limit</p><h2 id="common-sizes-title" class="text-[28px] font-semibold tracking-[-.04em] sm:text-[34px]">Common JPG to PDF target sizes</h2>
 				<p class="mt-3 max-w-[690px] text-sm leading-6 text-ink-subtle">Different portals use different attachment limits. These options are available in the converter; the final file size depends on your images and settings.</p>
 				<div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 200 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">For strict limits and small image sets. Fine detail may be reduced significantly.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 200 KB target">Open converter options</a></article>
-					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 500 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A commonly requested cap for compact application attachments.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 500 KB target">Open converter options</a></article>
-					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 1 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">More room for image detail when a portal accepts a larger document.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 1 MB target">Open converter options</a></article>
-					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 2 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A higher cap can help preserve more detail in a multi-image PDF.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 2 MB target">Open converter options</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 200 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">For strict limits and small image sets. Fine detail may be reduced significantly.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 200 KB target">Open converter options</a><a class="mt-2 inline-flex text-xs text-ink-subtle underline underline-offset-4 hover:text-ink" href="/jpg-to-pdf-under-200kb/">Read the 200 KB guide</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 500 KB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A commonly requested cap for compact application attachments.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 500 KB target">Open converter options</a><a class="mt-2 inline-flex text-xs text-ink-subtle underline underline-offset-4 hover:text-ink" href="/jpg-to-pdf-under-500kb/">Read the 500 KB guide</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 1 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">More room for image detail when a portal accepts a larger document.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 1 MB target">Open converter options</a><a class="mt-2 inline-flex text-xs text-ink-subtle underline underline-offset-4 hover:text-ink" href="/jpg-to-pdf-under-1mb/">Read the 1 MB guide</a></article>
+					<article class="surface-panel p-5"><h3 class="text-lg font-semibold text-ink">Under 2 MB</h3><p class="mt-2 text-sm leading-6 text-ink-subtle">A higher cap can help preserve more detail in a multi-image PDF.</p><a class="mt-4 inline-flex text-xs font-medium text-ink-muted underline underline-offset-4 hover:text-ink" href="/#converter" aria-label="Open converter options for a 2 MB target">Open converter options</a><a class="mt-2 inline-flex text-xs text-ink-subtle underline underline-offset-4 hover:text-ink" href="/jpg-to-pdf-under-2mb/">Read the 2 MB guide</a></article>
 				</div>
 			</div>
 		</section>

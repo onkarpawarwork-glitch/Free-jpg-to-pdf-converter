@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: '500kb-target',
+		heading: 'Use 500 KB as a maximum, not a fixed output size',
+		paragraphs: [
+			'The converter starts with a 500 KB maximum selected. That setting is a cap to work toward, not a request to pad every PDF to exactly 500 KB. A short set of simple images may produce a smaller file, while a longer or more detailed set may need more room.',
+			'If a receiving form allows 500 KB, check that the rule applies to the entire PDF and include only the pages that belong in the submission.',
+		],
+	},
+	{
+		id: 'check-500kb',
+		heading: 'Convert and check the measured result',
+		paragraphs: [
+			'Add your JPG or JPEG images, arrange their order, and keep 500 KB selected under Maximum PDF size. After conversion, review the result message and the downloaded document. If the limit is missed, use fewer required images or a larger maximum if the portal permits it.',
+		],
+		note: 'A lower cap can reduce image dimensions or quality. Compare the PDF’s readability with the upload requirements before submitting.',
+	},
+];
+
+const faqs = [
+	{ question: 'Is 500 KB the default maximum?', answer: 'Yes. The converter opens with 500 KB selected. You can keep that target or choose another preset, a custom maximum, or no size limit.' },
+	{ question: 'Will my PDF always be smaller than 500 KB?', answer: 'Not always. The converter measures the output and reports if the maximum was met. Many images or detailed photos can make a 500 KB target difficult.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-under-200kb/', label: 'Use a stricter 200 KB maximum' },
+	{ href: '/jpg-to-pdf-under-1mb/', label: 'Use a 1 MB maximum' },
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Set a custom PDF size' },
+];
+---
+
+<SeoLandingPage
+	title="Convert JPG to PDF Under 500 KB"
+	description="Use the converter’s 500 KB maximum for JPG or JPEG images. See how page count affects the total and check whether your PDF meets the limit."
+	eyebrow="500 KB maximum"
+	intro="A 500 KB cap can suit a compact image document when the destination sets a limit. The converter starts with this maximum selected, and checks the completed PDF rather than assuming the target was met."
+	sections={sections}
+	converterDescription="The existing converter already starts at 500 KB. Add your JPG or JPEG files, confirm the target, and review the measured result after conversion."
+	faqs={faqs}
+	related={related}
+/>

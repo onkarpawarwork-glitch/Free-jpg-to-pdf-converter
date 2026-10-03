@@ -1,0 +1,44 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'two-mb-cap',
+		heading: 'Make room for a larger set of image pages',
+		paragraphs: [
+			'A 2 MB maximum is the largest preset offered by this converter. If the receiving site allows that much space, it gives a multi-image PDF more room than the 200 KB, 500 KB, and 1 MB targets. More room can help retain detail, but it does not guarantee the source images will be unchanged.',
+			'Use the cap specified by the destination. A portal may set a smaller limit per attachment, so a 2 MB result is only suitable when its rules allow it.',
+		],
+	},
+	{
+		id: 'two-mb-conversion',
+		heading: 'Set 2 MB and check the combined file',
+		paragraphs: [
+			'Choose 2 MB under Maximum PDF size, add the JPG or JPEG pages, and convert. The maximum applies to the whole merged document. Review the output pages and the reported target result before you upload or share the PDF.',
+			'If the file exceeds the target, reduce the number of pages only when they are not required, or select a larger custom limit if the receiving site permits it.',
+		],
+	},
+];
+
+const faqs = [
+	{ question: 'Is 2 MB the maximum preset in the converter?', answer: 'Yes. The preset list includes 200 KB, 500 KB, 1 MB, and 2 MB. You can also enter a custom maximum up to 100 MB.' },
+	{ question: 'Can a 2 MB target guarantee that every image stays high quality?', answer: 'No. The target provides a maximum file size, and source images vary. Check the generated PDF for detail and confirm that the final size meets the destination’s rules.' },
+];
+
+const related = [
+	{ href: '/jpg-to-pdf-under-1mb/', label: 'Use a 1 MB maximum' },
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Set another custom maximum' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'Learn how size affects image detail' },
+];
+---
+
+<SeoLandingPage
+	title="Convert JPG to PDF Under 2 MB"
+	description="Set a 2 MB maximum for a JPG-to-PDF conversion. Learn how the cap applies to the combined document and check whether it fits."
+	eyebrow="2 MB maximum"
+	intro="Choose 2 MB when the destination allows a larger attachment and your PDF contains several JPG or JPEG pages. The target applies to the complete document, and the converter reports whether it was met."
+	sections={sections}
+	converterDescription="Choose 2 MB under Maximum PDF size. The limit applies to the merged PDF, so review the generated document and its measured size before sharing."
+	faqs={faqs}
+	related={related}
+/>

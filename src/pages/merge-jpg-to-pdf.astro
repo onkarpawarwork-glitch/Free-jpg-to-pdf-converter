@@ -1,0 +1,48 @@
+---
+import SeoLandingPage from '../components/SeoLandingPage.astro';
+
+const sections = [
+	{
+		id: 'arrange-pages',
+		heading: 'Arrange the images in the order you need',
+		paragraphs: [
+			'Choose the JPG or JPEG files, then arrange the queue so the PDF pages follow the order you intend. You can rotate an image or remove it before conversion, which is useful when a photo is sideways or should not appear in the document.',
+		],
+		bullets: [
+			'Add up to 20 images, with a 30 MB limit per file and 150 MB combined.',
+			'Leave “Merge all images into one PDF” selected to create a single document.',
+			'Choose page size, orientation, and margins for the output.',
+		],
+	},
+	{
+		id: 'check-merged-pdf',
+		heading: 'Check the document before you share it',
+		paragraphs: [
+			'A merged PDF is easier to attach when a form accepts one document for a set of pictures. The selected maximum PDF size applies to the complete output, so a limit that works for one photo may be too small for a longer set.',
+			'After converting, review the page sequence and image orientation in the downloaded PDF. If the file-size target is not met, remove images that are not required or choose a higher maximum when the receiving site allows it.',
+		],
+	},
+];
+
+const faqs = [
+	{ question: 'Can I reorder JPG images before merging them?', answer: 'Yes. Arrange the image queue before converting so the pages appear in your chosen order. You can also rotate or remove an image from the queue.' },
+	{ question: 'How many images can go into one PDF?', answer: 'The converter accepts up to 20 JPG or JPEG images at a time. Each image can be up to 30 MB, with a combined image limit of 150 MB.' },
+];
+
+const related = [
+	{ href: '/image-to-pdf-online/', label: 'Free JPG/JPEG image to PDF online' },
+	{ href: '/jpg-to-pdf-high-quality/', label: 'Keep more image detail' },
+	{ href: '/jpg-to-pdf-custom-size/', label: 'Set a custom PDF size' },
+];
+---
+
+<SeoLandingPage
+	title="Merge JPG Images into One PDF Online"
+	description="Combine multiple JPG or JPEG images in one PDF. Arrange, rotate, or remove images, set page options, and convert them in your browser."
+	eyebrow="Combine multiple images"
+	intro="When a form or recipient asks for one document, merge your JPG or JPEG images into a single PDF. Set the page order first, then choose the PDF layout and convert the complete set in your browser."
+	sections={sections}
+	converterDescription="Add the images you want to combine, keep “Merge all images into one PDF” selected, and arrange the queue before converting."
+	faqs={faqs}
+	related={related}
+/>
